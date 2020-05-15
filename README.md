@@ -9,6 +9,10 @@ Create an endpoint to draw cards to Dealer using a hand evaluation algorithm fro
 Create an endpoint to save the state after each rounds
 Create an endpoint to get the history for a given player
 
+For Routes visit
+
+http://localhost:3000/v1/docs
+
 ### Installation
 
 Clone the repo:
