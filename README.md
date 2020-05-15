@@ -1,5 +1,13 @@
 
 ## Getting Started
+Key Functionalities covered
+
+Create the MongoDB database Schema
+Create an endpoint to initiate the game, with a deck of 3 packs of cards (52x3), returning shuffled deck, players initial cards
+Create an endpoint to draw cards to specific player from current deck
+Create an endpoint to draw cards to Dealer using a hand evaluation algorithm from current deck
+Create an endpoint to save the state after each rounds
+Create an endpoint to get the history for a given player
 
 ### Installation
 
