@@ -27,7 +27,7 @@ const addTransactions = catchAsync(async (req, res) => {
   console.log('====================================');
   console.log({ lastTransaction });
   console.log('====================================');
-  if (lastTransaction) {
+  if (lastTransaction.length>0) {
     let obj = {
       description: description || 'alpha',
       amount: amount || '',
