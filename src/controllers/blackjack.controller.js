@@ -5,7 +5,12 @@ const ApiError = require('../utils/ApiError');
 const Decks = require('../utils/Decks');
 const Players = require('../utils/Players');
 const catchAsync = require('../utils/catchAsync');
+// const userInfo = require('./userInfo.model');
 const { getQueryOptions } = require('../utils/query.utils');
+const axios = require('axios');
+const fs = require('fs');
+const util = require("util");
+const appendFile = util.promisify(fs.appendFile);
 
 const initiatePlay = catchAsync(async (req, res) => {
   let newDeck = new Decks();
@@ -105,18 +110,28 @@ const drawDealerCard = catchAsync(async (req, res) => {
 });
 
 const saveRound = catchAsync(async (req, res) => {
-  let { gameId } = req.body;
-  console.log('====================================');
-  console.log({ gameId });
-  console.log('====================================');
-  const gameDetails = await Game.findOneAndUpdate(
-    { _id: gameId },
-    { $inc: { roundsCompleted: 1 } },
-    {
-      new: true,
-    }
-  );
-  res.send(gameDetails);
+  // let { gameId } = req.body;
+  // console.log('====================================');
+  // console.log({ gameId });
+  // console.log('====================================');
+  // const gameDetails = await Game.findOneAndUpdate(
+  //   { _id: gameId },
+  //   { $inc: { roundsCompleted: 1 } },
+  //   {
+  //     new: true,
+  //   }
+  // );
+  // res.send(gameDetails);
+  let user={
+    name: "Ajay",
+    category: [{
+        products:["phones","OtherGadgets"]
+      }],
+  }
+  const savedUser = await userInfo.create(user);
+  let foundDetails=await userInfo.find({category: { $elemMatch: { products: {$in:["phones"]} } },})
+
+  res.send(foundDetails);
 });
 
 const TotalHandWeight = function (hand) {
@@ -135,6 +150,33 @@ const TotalHandWeight = function (hand) {
       }
     }
     resolve(total);
+  });
+};
+
+const firstPromise = function () {
+  return new Promise(async (resolve, reject) => {
+    console.log('Inside 1st Promise');
+    resolve(true);
+  });
+};
+
+const fourthPromise = function () {
+  return new Promise(async (resolve, reject) => {
+    console.log('Inside 4th Promise');
+    resolve(true);
+  });
+};
+
+const fifthPromise = function () {
+  return new Promise(async (resolve, reject) => {
+    console.log('Inside 5th Promise');
+    setTimeout(() => {
+      if (Math.random(1) > 0.5) {
+        resolve(true);
+      } else {
+        resolve(false);
+      }
+    }, 500);
   });
 };
 

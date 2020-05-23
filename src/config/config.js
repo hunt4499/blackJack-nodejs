@@ -17,7 +17,7 @@ const envVarsSchema = Joi.object()
 // SMTP_PASSWORD='email-server-password',
 // EMAIL_FROM='support@yourapp.com',
     NODE_ENV: Joi.string().valid('production', 'development', 'test').required(),
-    PORT: Joi.number().default(3000),
+    PORT: Joi.number().default(5000),
     MONGODB_URL: `mongodb://127.0.0.1:27017/node-boilerplate`,
     JWT_SECRET: 'thisisasamplesecret',
     JWT_ACCESS_EXPIRATION_MINUTES: Joi.number().default(30).description('minutes after which access tokens expire'),
@@ -38,7 +38,7 @@ if (error) {
 
 module.exports = {
   env: envVars.NODE_ENV,
-  port: 3000,
+  port: 5000,
   mongoose: {
     url: `mongodb://127.0.0.1:27017/node-boilerplate` + (envVars.NODE_ENV === 'test' ? '-test' : ''),
     options: {
